@@ -1,0 +1,43 @@
+        
+<div class="jumbotron">
+	<h1 class="display-4">askyourquestion.com</h1>	 
+</div>
+<div class = "container">
+	<div class= "row">
+		<div class = "col-sm-6">
+			<form class="form-group"> 
+			<label> Search by keywords:</label>
+            <input class="form-control" type="text" placeholder="Search " aria-label="Search" ng-model="data.query">
+		</div>
+		
+  		<div class = "col-sm-2">
+ 			<br> 
+			  <button type="submit" class="btn btn-primary" ng-click="save()">Search</button>
+			  
+  		</div>
+    </div>
+</div>
+
+
+<div ng-controller="OtherController" class="other-controller">
+    <div class="text-center">
+    <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>
+    </div>
+</div>
+
+<div class = "list-group" dir-paginate="d in data | itemsPerPage: pageSize" current-page="currentPage">
+    <h2 class="list-group-item-text"> {{ d.Title }} </h2> 
+    <p class="list-group-item-text" ng-if = "flag" > Total no of votes:  {{ d.NumberOfVotes}} Total no of answers: {{d.TotalAnswers}} Username: {{d.Name}}  </p>
+    <h4 class="list-group-item-text"  ng-bind-html="d.Description"></h4> 
+</div>
+
+<script>
+    if('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/serviceworkernew.js', 
+    {scope: '/'}).then(function(reg) {
+        console.log("Service worker registered")
+    }).catch(function(err) {
+        console.log(err);
+    });
+} 
+</script>
